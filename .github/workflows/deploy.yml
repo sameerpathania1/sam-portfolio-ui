@@ -1,0 +1,22 @@
+name: Build and Deploy frontend to GHCR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u sameerpathania1 --password-stdin
+
+      - name: Build and Push Backend Image
+        run: |
+          docker build -t ghcr.io/sameerpathania1/portfolio-frontend:latest .
+          docker push ghcr.io/sameerpathania1/portfolio-frontend:latest
