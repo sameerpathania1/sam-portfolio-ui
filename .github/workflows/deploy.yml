@@ -14,9 +14,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Login to GHCR
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u sameerpathania1 --password-stdin
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build and Push Backend Image
+      - name: Build Docker image
         run: |
-          docker build -t ghcr.io/sameerpathania1/portfolio-frontend:latest .
-          docker push ghcr.io/sameerpathania1/portfolio-frontend:latest
+          docker build -t ghcr.io/${{ github.actor }}/portfolio-frontend:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.actor }}/portfolio-frontend:latest
