@@ -11,9 +11,15 @@ RUN npm install --frozen-lockfile
 COPY . .
 RUN npm run build
 
-# Use a minimal image to store the build output
+# Use a minimal image to store and serve the build output
 FROM alpine:latest
-WORKDIR /output
+
+WORKDIR /usr/share/nginx/html
+
+# Copy React build from the builder stage
 COPY --from=builder /app/build .
 
-CMD ["cp", "-r", "/output", "/app/build"]
+# Ensure correct permissions
+RUN chmod -R 755 /usr/share/nginx/html
+
+CMD ["sh", "-c", "cp -r /usr/share/nginx/html /frontend_build"]
