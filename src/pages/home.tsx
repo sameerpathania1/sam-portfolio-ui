@@ -4,7 +4,7 @@ export default function Home() {
     <div className='flex h-full justify-center items-center'>
       <div className='flex flex-col lg:flex-row flex-wrap gap-10 lg:gap-[100px]'>
         <div className='size-56 sm:size-60 lg:size-96 overflow-hidden rounded-full border border-violet-400 p-2 m-auto lg:m-0'>
-          <img className="rounded-full" src="/images/me.jpeg" alt="it's me" />
+          <img className="rounded-full" src="/images/me.jpg" alt="it's me" />
         </div>
 
         <div className="max-w-[450px] flex flex-col gap-6 m-auto p-2">
